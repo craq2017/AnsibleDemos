@@ -1,19 +1,11 @@
 ---
-- name: Remove Java 1.7 and some basic dependencies
-  yum: name={{item}} state=absent
-  with_items:
-   - unzip
-   - java-1.7.0-openjdk
-   - libselinux-python
-   - libsemanage-python
-
-- name: Remove group "jboss"
-  group:
+- name: Remove user "jboss"
+  user:
     name: jboss
     state: absent
 
-- name: Remove user "jboss"
-  user:
+- name: Remove group "jboss"
+  group:
     name: jboss
     state: absent
 
@@ -28,3 +20,11 @@
 
 - name: Remove JBoss installation
   shell: /bin/rm -rf /usr/share/jboss-as
+
+- name: Remove Java 1.7 and some basic dependencies
+  yum: name={{item}} state=absent
+  with_items:
+   - unzip
+   - java-1.7.0-openjdk
+   - libselinux-python
+   - libsemanage-python
