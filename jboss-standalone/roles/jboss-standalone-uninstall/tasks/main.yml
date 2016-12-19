@@ -16,7 +16,6 @@
   user:
     name: jboss
     state: absent
-    remove: yes
 
 - name: Disable JBoss
   shell: service jboss stop && chkconfig jboss off
@@ -27,4 +26,3 @@
 
 - name: Remove JBoss installation
   shell: /bin/rm -rf /usr/share/jboss-as
-
