@@ -1,4 +1,16 @@
 ---
+- name: Disable JBoss
+  shell: service jboss stop && chkconfig jboss off
+
+- name: Verify JBoss is down
+  service: name=jboss enabled=no state=stopped
+
+- name: Remove the JBoss init script
+  shell: /bin/rm -rf /etc/init.d/jboss
+
+- name: Remove JBoss installation
+  shell: /bin/rm -rf /usr/share/jboss-as
+
 - name: Remove user "jboss"
   user:
     name: jboss
@@ -8,18 +20,6 @@
   group:
     name: jboss
     state: absent
-
-- name: Disable JBoss
-  shell: service jboss stop && chkconfig jboss off
-
-- name: Disable JBoss
-  service: name=jboss enabled=no state=stopped
-
-- name: Remove the init script
-  shell: /bin/rm -rf /etc/init.d/jboss
-
-- name: Remove JBoss installation
-  shell: /bin/rm -rf /usr/share/jboss-as
 
 - name: Remove Java 1.7 and some basic dependencies
   yum: name={{item}} state=absent
