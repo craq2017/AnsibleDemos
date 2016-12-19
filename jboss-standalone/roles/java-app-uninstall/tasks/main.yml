@@ -1,10 +1,10 @@
 ---
 - name: Undeploy HelloWorld to JBoss
-  jboss:
-  deployment: helloworld.war
-  state: present
+  - jboss:
+    deployment: helloworld.war
+    state: absent
 
 - name: Undeploy Ticket Monster to JBoss
-  jboss: 
-  deployment: ticket-monster.war
-  state: absent
+  - jboss: 
+    deployment: ticket-monster.war
+    state: absent
